@@ -1,0 +1,30 @@
+# type(<scope>): <subject>
+
+# <body>
+
+# <footer>
+
+# type should be one of the following:
+# - feat (new feature)
+# - fix (bug fix)
+# - docs (changes to documentation)
+# - style (formatting, missing semi colons, etc; no code change)
+# - refactor (refactoring production code)
+# - test (adding missing tests, refactoring tests; no production code change)
+# - chore (updating grunt tasks etc; no production code change)
+
+# scope specifies place of the commit change e.g. (admin) or (registration)
+
+# subject should use imperative tone: “change” not “changed” nor “changes”
+# - don't capitalize first letter
+# - no dot (.) at the end
+
+# body should go into detail about changes made
+# - uses imperative, present tense: “change” not “changed” nor “changes”
+# - bullet point or paragraph form are both acceptable
+
+# footer should contain any issue tracking info or actions
+# - e.g. close #123,  close #245, close #992
+
+# For a full example of how to write a good commit message, check out
+# http://karma-runner.github.io/0.8/dev/git-commit-msg.html
