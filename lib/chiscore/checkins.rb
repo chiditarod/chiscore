@@ -42,7 +42,8 @@ module ChiScore
       end
 
       def checkout(checkpoint, team, admin)
-        raise EarlyCheckout if !admin && early?(team)
+        is_early = Repository.time_for(checkpoint.id, team.id) >= 60
+        raise EarlyCheckout if !admin && is_early
         Repository.check_out!(checkpoint.id, team.id)
       end
 

@@ -53,24 +53,35 @@ describe ChiScore::Checkins do
   end
 
   it "checks out a team if their time left is less than a minute" do
-    allow(repo).to receive(:lock).with("team-id") { 59 }
+    allow(repo).to receive(:time_for).with(checkpoint.id, "team-id") { 59 }
     expect(repo).to receive(:check_out!).with(1000, "team-id")
     ChiScore::Checkins.checkout(checkpoint, team, false)
   end
 
   it "raises an early checkout error if team time left is a minute or greater" do
-    allow(repo).to receive(:lock).with("team-id") { 60 }
+    allow(repo).to receive(:time_for).with(checkpoint.id, "team-id") { 60 }
+
     expect {
       ChiScore::Checkins.checkout(checkpoint, team, false)
     }.to raise_error ChiScore::Checkins::EarlyCheckout
   end
 
-  it "does not raise early checkout error if team time left is a minute or greater and admin" do
+  it "does not raise early checkout error if user is admin" do
     repo.set_strategy(ChiScore::NoopRepositoryStrategy)
-    allow(repo).to receive(:lock).with("team-id") { 60 }
+    allow(repo).to receive(:time_for).with(checkpoint.id, "team-id") { 60 }
 
     expect {
       ChiScore::Checkins.checkout(checkpoint, team, true)
+    }.not_to raise_error
+  end
+
+  it "does not raise early checkout error if checking out for inactive checkpoint" do
+    other_checkpoint = ChiScore::Checkpoint.new(1001, "second")
+    allow(repo).to receive(:time_for).with(other_checkpoint.id, "team-id") { 60 }
+    allow(repo).to receive(:time_for).with(checkpoint.id, "team-id") { 0 }
+
+    expect {
+      ChiScore::Checkins.checkout(checkpoint, team, false)
     }.not_to raise_error
   end
 
