@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby "2.5.3"
 
-gem 'sinatra', '~> 1'
+gem 'sinatra', '~> 2'
 gem 'redis'
 gem 'rake'
 gem "puma"
