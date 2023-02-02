@@ -6,15 +6,15 @@ cache:
    - /home/travis/.rvm/
 
 node_js:
-  - 6
   - 8
+  - 19.5
 
 services:
   - redis-server
 
 before_install:
-  - rvm install 2.5.3
-  - gem install bundler -v 2.0.2
+  - rvm install 2.7.5
+  - gem install bundler
   - bundle install
 
 script:
