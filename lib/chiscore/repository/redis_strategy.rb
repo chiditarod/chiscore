@@ -80,8 +80,8 @@ module ChiScore
     end
 
     def self.redis
-      if ENV['REDISTOGO_URL']
-        uri = ::URI.parse(ENV["REDISTOGO_URL"])
+      if ENV['REDIS']
+        uri = ::URI.parse(ENV["REDIS"])
         @_redis_client ||= Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
       else
         @_redis_client ||= Redis.new

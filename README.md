@@ -84,7 +84,7 @@ npm install
     - `ADMIN_KEY` - find in `config/` after running `bundle exec rake gen_secrets`
     - `SECRET_KEY` - find in `config/` after running `bundle exec rake gen_secrets`
     - `TZ` - Set the app timezone.  See the `TZ` column in [the list](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
-    - `REDISTOGO_URL` - Example: `redis://redistogo:abc123abc12381276e68463f5b9d4764@foo.redistogo.com:11442/`
+    - `REDIS` - Example: `redis://redistogo:abc123abc12381276e68463f5b9d4764@foo.redistogo.com:11442/`
 
 - Add the heroku remote if needed:
 
