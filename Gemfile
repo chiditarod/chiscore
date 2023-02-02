@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.5.3"
+ruby "2.7.5"
 
 gem 'sinatra', '~> 1'
 gem 'redis'

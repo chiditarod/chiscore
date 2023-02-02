@@ -19,3 +19,5 @@ config/secret_key
 config/admin_key
 
 vendor/
+
+*.swp
