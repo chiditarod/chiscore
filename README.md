@@ -37,17 +37,19 @@ _Assumes you are using OSX. Pull requests for other setups gladly accepted._
 - (optional, recommended) Install docker 
 - Install prequisites and clone the code:
 
-```bash
-brew install redis # skip if using docker
-brew install ruby-build
-rbenv install 2.5.0
+```
 git clone github.com:chiditarod/chiscore
 cd chiscore
 ```
 
-### Server Setup
+### Install
 
-```bash
+#### MacOS 12.6
+
+```
+brew install readline openssl ruby-build
+brew install redis # skip if using docker
+rbenv install 2.7.5
 gem install bundler
 bundle install
 bundle exec rake gen_secrets     # generate secret keys
@@ -60,8 +62,9 @@ You need node.js for compilation and running of JavaScript specs.
 ```bash
 brew install node
 npm install -g n           # n is an easy node version switcher
-sudo n 8.9.4               # install node version 8.9.4, for example
-yarn
+npm install
+# sudo n 8.9.4               # install node version 8.9.4, for example
+# yarn
 ```
 
 ### Development Login
