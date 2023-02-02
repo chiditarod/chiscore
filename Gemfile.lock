@@ -4,6 +4,7 @@ GEM
     awesome_print (1.8.0)
     codeclimate-test-reporter (1.0.7)
       simplecov
+    connection_pool (2.3.0)
     diff-lcs (1.3)
     docile (1.1.5)
     json (2.1.0)
@@ -17,7 +18,10 @@ GEM
     rack-test (0.8.3)
       rack (>= 1.0, < 3)
     rake (12.3.3)
-    redis (4.0.1)
+    redis (5.0.6)
+      redis-client (>= 0.9.0)
+    redis-client (0.12.1)
+      connection_pool
     rspec (3.7.0)
       rspec-core (~> 3.7.0)
       rspec-expectations (~> 3.7.0)

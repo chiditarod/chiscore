@@ -80,9 +80,8 @@ module ChiScore
     end
 
     def self.redis
-      if ENV['REDISTOGO_URL']
-        uri = ::URI.parse(ENV["REDISTOGO_URL"])
-        @_redis_client ||= Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+      if ENV['REDIS_URL']
+        @_redis_client ||= Redis.new(url: ENV['REDIS_URL'], ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE })
       else
         @_redis_client ||= Redis.new
       end
