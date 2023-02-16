@@ -28,5 +28,5 @@ ChiScore.Services =
       data: data
       success: callback
       dataType: 'json'
-      statusCode: { 404 : -> alert("Couldn't find that team. Read better.") }
+      statusCode: { 404 : -> alert("Team not found") }
     })
