@@ -40,7 +40,7 @@ class ChiScore.CheckinView extends Backbone.View
         else
           alert("You can't check out that team yet!")
     else
-      if confirm("Are you sure you want to DELETE this checkin? This should only be done if they were checked in by mistake.")
+      if confirm("Are you sure you want to DELETE this checkin? This should only be done if the team was checked in by mistake. Click OK to delete the checkin and Cancel to go back.")
         ChiScore.Services.deleteCheckin null, this.getTeam().id, (response) =>
           if response.destroyed is true
             this.$el.slideUp 100, -> $(this).remove()
