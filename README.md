@@ -143,7 +143,8 @@ ___Caution: Destructive___
 
 ___Caution: Destructive___
 
-    rake redis_flushdb            # flush the connected redis database
+    rake redis_flushdb # local
+    heroku run bundle exec rake redis_flushdb
 
 ### Manually add a checkin
 
