@@ -30,16 +30,22 @@ leiu of the files on disk.
 
 _Assumes you are using OSX. Pull requests for other setups gladly accepted._
 
-### Environment
+### Setup Daemons and Environment
 
 - Install [homebrew](http://brew.sh/).
 - [Install rbenv](https://github.com/rbenv/rbenv#homebrew-on-mac-os-x) using homebrew.
-- (optional, recommended) Install docker 
 - Install prequisites and clone the code:
 
-```
+```bash
+brew install ruby-build
+rbenv install $(cat .ruby-version)
 git clone github.com:chiditarod/chiscore
 cd chiscore
+```
+
+Boot local docker
+```
+docker-compose up -d redis
 ```
 
 ### Install
@@ -47,6 +53,9 @@ cd chiscore
 #### MacOS 12.6
 
 ```
+xcode-select --install
+softwareupdate --all --install --force
+
 brew install readline openssl ruby-build
 brew install redis # skip if using docker
 rbenv install 2.7.5
@@ -70,16 +79,25 @@ npm install
 ### Development Login
 
 - Use a username and password from `config/data/$year/logins.csv`
-- Use a number from `config/data/$year/teams.csv`
-
+- Use a team number from `config/data/$year/teams.csv`
 
 ## Deployment to Heroku
+
+Do these steps every year.
+
+- Copy `config/data/2023/*` to `config/data/2024/` (change the years accordingly)
+- Customize the new files as necessary.
+- Modify `app.rb` and update the year.
+- Do not submit the new files as a PR.  Do not push them to GitHub otherwise you will expose the passwords.
+
+If copying the directory outright, change the old passwords before pushing to GitHub.
+
 
 - Generate the admin and secret keys:
 
         bundle exec rake gen_secrets
 
-- Set the following Config Vars:
+- Set the following Heroku Config Vars:
 
     - `ADMIN_KEY` - find in `config/` after running `bundle exec rake gen_secrets`
     - `SECRET_KEY` - find in `config/` after running `bundle exec rake gen_secrets`
@@ -88,11 +106,12 @@ npm install
 
 - Add the heroku remote if needed:
 
-		heroku git:remote -a chiscore1
+        heroku git:remote -a chiscore1
 
 - Deploy the application:
 
-		git push heroku master
+        git push heroku main
+        git push heroku db/nopr-2024:main
 
 ## Usage Examples
 
@@ -148,7 +167,20 @@ ___Caution: Destructive___
 
 ### Manually add a checkin
 
-    > hset "checkins:6" 1617 1520117160
+Get timestamp from linux shell
+```
+$ date +%s
+1706169136
+```
+
+Open redis console
+```
+$ redis_cli
+$ heroku redis:cli -a $app_name
+
+> hset "checkins:$login_id" $team_id $timestamp
+> hset "checkins:6" 1617 1706169136
+```
 
 ## Export
 
